@@ -2,6 +2,8 @@
 
 **Product Name:** Lanewise
 
+**Product URL:** https://github.com/ckwairmetro/lanewise
+
 **Product Description:**
 
 Lanewise is a free personal improvement tool for League of Legends players of every rank. A player
@@ -51,10 +53,11 @@ cached.
 A typical report takes about 44 requests (20 games: match + timeline each, plus account, league,
 mastery and the match list). Finished matches and timelines are cached permanently, and rank,
 mastery and match lists for 10 minutes, so repeat visits cost only a few requests. The client
-follows the X-App-Rate-Limit and X-Method-Rate-Limit headers per routing region and backs off on
-429 responses. The API key stays on the server and is never sent to the browser.
+follows the X-App-Rate-Limit headers per routing region and backs off on 429 responses (honouring
+Retry-After). The API key stays on the server and is never sent to the browser.
 
 The product is a web app: a Python (Flask) back end and a plain HTML/JavaScript front end. The
-source code is on GitHub: <your repository URL>. A working prototype runs at <your demo URL or
-"locally, see the README">. Lanewise is free, has no ads or paid features, and carries Riot's
-legal boilerplate on every page.
+full source is public on GitHub at https://github.com/ckwairmetro/lanewise. The working prototype is
+at commit 41e0621 (https://github.com/ckwairmetro/lanewise/commit/41e062183e85dd76a7e988ad55e40265c26185f0),
+and the README explains how to run it. Lanewise is free, has no ads or paid features, and carries
+Riot's legal boilerplate on every page.
