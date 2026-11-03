@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanewise</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">◆</span> Lanewise</div>
+  <form id="search">
+    <input id="riotid" placeholder="Riot ID, e.g. Name#EUW" autocomplete="off" required>
+    <select id="platform"></select>
+    <select id="count">
+      <option value="10">10 games</option><option value="20" selected>20 games</option><option value="30">30 games</option>
+    </select>
+    <button type="submit">Analyze</button>
+  </form>
+</header>
+
+<main>
+  <section id="intro" class="card">
+    <h1>See how you really play.</h1>
+    <p>Lanewise reads your recent ranked solo games and compares every part of your game with players
+      at <b>your rank, in your role, on your champions</b>. It shows where you spend your time on the map,
+      which champions are working for you, and the habits that move your results.</p>
+    <ul class="features">
+      <li><b>Skill breakdown</b>: laning, farming, fighting, survival, vision, objectives and teamplay as percentiles against players like you.</li>
+      <li><b>Heatmap</b>: where you are in each phase of the game, and where you take and lose fights.</li>
+      <li><b>Champion pool</b>: what to keep, what to drop, counters to watch and similar champions to try.</li>
+      <li><b>Traits and habits</b>: your play style, tilt after losses, long sessions and loss streaks.</li>
+    </ul>
+  </section>
+
+  <div id="status" class="hidden"></div>
+
+  <section id="report" class="hidden">
+    <div class="card player">
+      <div>
+        <div id="pname" class="pname"></div>
+        <div id="prank" class="muted"></div>
+      </div>
+      <div class="overall"><div id="poverall" class="big"></div><div class="muted">overall percentile</div></div>
+    </div>
+
+    <nav class="tabs">
+      <button data-tab="overview" class="active">Overview</button>
+      <button data-tab="heatmap">Heatmap</button>
+      <button data-tab="champions">Champion pool</button>
+      <button data-tab="habits">Traits &amp; habits</button>
+      <button data-tab="matches">Matches</button>
+    </nav>
+
+    <div id="tab-overview" class="tab">
+      <div class="grid2">
+        <div class="card"><h2>Your game against similar players</h2><svg id="radar" viewBox="0 0 360 340"></svg>
+          <p class="muted small" id="benchnote"></p></div>
+        <div class="card"><h2>Strengths and focus areas</h2><div id="sf"></div></div>
+      </div>
+      <div class="card"><h2>Aspect details</h2><div id="aspects"></div></div>
+    </div>
+
+    <div id="tab-heatmap" class="tab hidden">
+      <div class="card">
+        <h2>Where you play</h2>
+        <div class="controls">
+          <label>Phase <select id="hm-phase">
+            <option value="all">Whole game</option><option value="early">Laning (0-14)</option>
+            <option value="mid">Mid game (14-25)</option><option value="late">Late game (25+)</option></select></label>
+          <label>Champion <select id="hm-champ"><option value="">All</option></select></label>
+          <label><input type="checkbox" id="hm-mirror" checked> Show red-side games from blue side</label>
+          <label><input type="checkbox" id="hm-events" checked> Kills and deaths</label>
+        </div>
+        <div class="maprow">
+          <canvas id="map" width="512" height="512"></canvas>
+          <div class="legend">
+            <p><span class="dot heat"></span> time spent (one sample per minute)</p>
+            <p><span class="dot kill"></span> kill or assist</p>
+            <p><span class="dot death"></span> death</p>
+            <p class="muted small" id="hm-summary"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-champions" class="tab hidden">
+      <div class="card"><h2>Your champions</h2><div id="pool"></div></div>
+      <div class="grid2">
+        <div class="card"><h2>Worth trying</h2><div id="suggest"></div></div>
+        <div class="card"><h2>High mastery, not played lately</h2><div id="legacy"></div></div>
+      </div>
+    </div>
+
+    <div id="tab-habits" class="tab hidden">
+      <div class="card"><h2>Your traits</h2><div id="traits"></div></div>
+      <div class="grid2">
+        <div class="card"><h2>Play style</h2><div id="tendencies"></div></div>
+        <div class="card"><h2>Session habits</h2><div id="sessions"></div></div>
+      </div>
+      <div class="card"><h2>When you play best</h2><canvas id="hours" width="720" height="160"></canvas></div>
+    </div>
+
+    <div id="tab-matches" class="tab hidden"><div class="card"><div id="matches"></div></div></div>
+  </section>
+</main>
+
+<footer>
+  Lanewise isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone
+  officially involved in producing or managing Riot Games properties. Riot Games, and all associated
+  properties are trademarks or registered trademarks of Riot Games, Inc.
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
